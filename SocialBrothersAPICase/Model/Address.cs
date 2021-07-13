@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace SocialBrothersAPICase.Model
 {
     public class Address
     {
+        public long Id { get; set; }
         private string straat;
         private int huisnummer;
         private string toevoeging;

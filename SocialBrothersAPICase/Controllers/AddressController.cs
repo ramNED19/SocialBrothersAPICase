@@ -16,26 +16,31 @@ namespace SocialBrothersAPICase.Controllers
     public class AddressController : ControllerBase
     {
         // GET api/<AddressController>/5
+        [Route("get")]
         [HttpGet]
-        public IEnumerable<Address> GetAll()
+        public IEnumerable<Address> GetAll([FromQuery] Filters filters, [FromQuery] string orderBy)
         {
-            SQLiteDataReader reader = SQLiteDB.ReadAll();
+            SQLiteDataReader reader = SQLiteDB.ReadAll(filters, orderBy);
             List<Address> addresses = new List<Address>();
             while (reader.Read())
             {
-                Address address = new Address();
-                address.Straat = reader.GetFieldValue<string>(reader.GetOrdinal("Straat"));
-                address.Huisnummer = reader.GetFieldValue<int>(reader.GetOrdinal("Huisnummer"));
-                address.Toevoeging = reader.GetFieldValue<string>(reader.GetOrdinal("Toevoeging"));
-                address.Postcode = reader.GetFieldValue<string>(reader.GetOrdinal("Postcode"));
-                address.Plaats = reader.GetFieldValue<string>(reader.GetOrdinal("Plaats"));
-                address.Land = reader.GetFieldValue<string>(reader.GetOrdinal("Land"));
+                Address address = new Address
+                {
+                    Id = reader.GetFieldValue<Int64>(reader.GetOrdinal("ID")),
+                    Straat = reader.GetFieldValue<string>(reader.GetOrdinal("Straat")),
+                    Huisnummer = reader.GetFieldValue<int>(reader.GetOrdinal("Huisnummer")),
+                    Toevoeging = reader.GetFieldValue<string>(reader.GetOrdinal("Toevoeging")),
+                    Postcode = reader.GetFieldValue<string>(reader.GetOrdinal("Postcode")),
+                    Plaats = reader.GetFieldValue<string>(reader.GetOrdinal("Plaats")),
+                    Land = reader.GetFieldValue<string>(reader.GetOrdinal("Land"))
+                };
                 addresses.Add(address);
             }
             return addresses;
         }
 
         // POST api/<AddressController>
+        [Route("create")]
         [HttpPost]
         public void Post([FromQuery] Address address)
         {
@@ -44,14 +49,16 @@ namespace SocialBrothersAPICase.Controllers
 
         // PUT api/<AddressController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromQuery] Address address)
         {
+            SQLiteDB.UpdateAddress(id, address);
         }
 
         // DELETE api/<AddressController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            SQLiteDB.DeleteAddress(id);
         }
     }
 }
