@@ -16,11 +16,11 @@ namespace SocialBrothersAPICase.Controllers
     public class AddressController : ControllerBase
     {
         // GET api/<AddressController>/5
-        [Route("getAll")]
+        [Route("get")]
         [HttpGet]
-        public IEnumerable<Address> GetAll()
+        public IEnumerable<Address> GetAll([FromQuery] Filters filters)
         {
-            SQLiteDataReader reader = SQLiteDB.ReadAll();
+            SQLiteDataReader reader = SQLiteDB.ReadAll(filters);
             List<Address> addresses = new List<Address>();
             while (reader.Read())
             {

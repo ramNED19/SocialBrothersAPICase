@@ -100,12 +100,18 @@ namespace SocialBrothersAPICase.Data
             //sqlite_con.Close();
         }
 
-        public static SQLiteDataReader ReadAll()
+        public static SQLiteDataReader ReadAll(Filters filters)
         {
             sqlite_cmd = new SQLiteCommand();
             //sqlite_con.Open();
             sqlite_cmd.Connection = sqlite_con;
-            sqlite_cmd.CommandText = "select * from Adres";
+            sqlite_cmd.CommandText = "select * from Adres " +
+                "where instr(Straat, '" + filters.Straat + "') > 0 " +
+                "and instr(Toevoeging, '" + filters.Toevoeging + "') > 0 " +
+                "and instr(Postcode, '" + filters.Postcode + "') > 0 " +
+                "and instr(Plaats, '" + filters.Plaats + "') > 0 " +
+                "and instr(Land, '" + filters.Land + "') > 0 " +
+                "and Huisnummer like '%" + filters.Huisnummer + "%';";
             SQLiteDataReader reader = sqlite_cmd.ExecuteReader();
             return reader;
         }
