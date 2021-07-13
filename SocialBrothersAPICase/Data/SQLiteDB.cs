@@ -89,18 +89,13 @@ namespace SocialBrothersAPICase.Data
             //sqlite_con.Close();
         }
 
-        public static void DeleteAddress(Address address)
+        public static void DeleteAddress(int id)
         {
             sqlite_cmd = new SQLiteCommand();
             //sqlite_con.Open();
             sqlite_cmd.Connection = sqlite_con;
             sqlite_cmd.CommandText = "delete from Adres where " +
-                "Straat='" + address.Straat + "'," +
-                "Huisnummer='" + address.Huisnummer + "'," +
-                "Toevoeging='" + address.Toevoeging + "'," +
-                "Postcode='" + address.Postcode + "'," +
-                "Plaats='" + address.Plaats + "'," +
-                "Land='" + address.Land + "'";
+                "ID = " + id + "";
             sqlite_cmd.ExecuteNonQuery();
             //sqlite_con.Close();
         }
