@@ -100,8 +100,12 @@ namespace SocialBrothersAPICase.Data
             //sqlite_con.Close();
         }
 
-        public static SQLiteDataReader ReadAll(Filters filters)
+        public static SQLiteDataReader ReadAll(Filters filters, string orderBy)
         {
+            if (orderBy == null)
+            {
+                orderBy = "ID";
+            }
             sqlite_cmd = new SQLiteCommand();
             //sqlite_con.Open();
             sqlite_cmd.Connection = sqlite_con;
@@ -111,7 +115,9 @@ namespace SocialBrothersAPICase.Data
                 "and instr(Postcode, '" + filters.Postcode + "') > 0 " +
                 "and instr(Plaats, '" + filters.Plaats + "') > 0 " +
                 "and instr(Land, '" + filters.Land + "') > 0 " +
-                "and Huisnummer like '%" + filters.Huisnummer + "%';";
+                "and Huisnummer like '%" + filters.Huisnummer + "%' " +
+                "order by " + orderBy +
+                ";";
             SQLiteDataReader reader = sqlite_cmd.ExecuteReader();
             return reader;
         }

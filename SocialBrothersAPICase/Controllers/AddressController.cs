@@ -18,9 +18,9 @@ namespace SocialBrothersAPICase.Controllers
         // GET api/<AddressController>/5
         [Route("get")]
         [HttpGet]
-        public IEnumerable<Address> GetAll([FromQuery] Filters filters)
+        public IEnumerable<Address> GetAll([FromQuery] Filters filters, [FromQuery] string orderBy)
         {
-            SQLiteDataReader reader = SQLiteDB.ReadAll(filters);
+            SQLiteDataReader reader = SQLiteDB.ReadAll(filters, orderBy);
             List<Address> addresses = new List<Address>();
             while (reader.Read())
             {
