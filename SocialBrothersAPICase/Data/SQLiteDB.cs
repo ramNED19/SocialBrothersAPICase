@@ -71,25 +71,20 @@ namespace SocialBrothersAPICase.Data
             }
         }
 
-        public static void UpdateAddress(Address oldAddress, Address newAddress)
+        public static void UpdateAddress(int id, Address address)
         {
             sqlite_cmd = new SQLiteCommand();
             //sqlite_con.Open();
             sqlite_cmd.Connection = sqlite_con;
             sqlite_cmd.CommandText = "update Adres set " +
-                "Straat='" + newAddress.Straat + "'," +
-                "Huisnummer='" + newAddress.Huisnummer + "'," +
-                "Toevoeging='" + newAddress.Toevoeging + "'," +
-                "Postcode='" + newAddress.Postcode + "'," +
-                "Plaats='" + newAddress.Plaats + "'," +
-                "Land='" + newAddress.Land + "'," +
+                "Straat='" + address.Straat + "'," +
+                "Huisnummer='" + address.Huisnummer + "'," +
+                "Toevoeging='" + address.Toevoeging + "'," +
+                "Postcode='" + address.Postcode + "'," +
+                "Plaats='" + address.Plaats + "'," +
+                "Land='" + address.Land + "'" +
                 " where " +
-                "Straat='" + oldAddress.Straat + "'," +
-                "Huisnummer='" + oldAddress.Huisnummer + "'," +
-                "Toevoeging='" + oldAddress.Toevoeging + "'," +
-                "Postcode='" + oldAddress.Postcode + "'," +
-                "Plaats='" + oldAddress.Plaats + "'," +
-                "Land='" + oldAddress.Land + "'";
+                "ID = " + id + ";";
             sqlite_cmd.ExecuteNonQuery();
             //sqlite_con.Close();
         }
