@@ -59,6 +59,10 @@ namespace SocialBrothersAPICase.Model
             get { return toevoeging; }
             set
             {
+                if(value == null)
+                {
+                    value = "";
+                }
                 Regex regex = new Regex(@"^[a-zA-Z]?$");
                 if (regex.IsMatch(value))
                 {

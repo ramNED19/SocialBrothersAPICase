@@ -39,6 +39,38 @@ namespace SocialBrothersAPICase.Controllers
             return addresses;
         }
 
+        [Route("distance")]
+        [HttpGet]
+        public double GetDistance([FromQuery] string straat1,[FromQuery] int huisnummer1, [FromQuery] string toevoeging1, [FromQuery] string plaats1, [FromQuery] string land1, [FromQuery] string straat2, [FromQuery] int huisnummer2, [FromQuery] string toevoeging2, [FromQuery] string plaats2, [FromQuery] string land2)
+        {
+            Address address1 = new Address()
+            {
+                Straat = straat1,
+                Huisnummer = huisnummer1,
+                Toevoeging = toevoeging1,
+                Plaats = plaats1,
+                Land = land1,
+                Postcode = "lorem"
+            };
+            Address address2 = new Address()
+            {
+                Straat = straat2,
+                Huisnummer = huisnummer2,
+                Toevoeging = toevoeging2,
+                Plaats = plaats2,
+                Land = land2,
+                Postcode = "lorem"
+            };
+            if (ModelState.IsValid)
+            {
+            return APIClient.GetDistance(address1, address2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         // POST api/<AddressController>
         [Route("create")]
         [HttpPost]
