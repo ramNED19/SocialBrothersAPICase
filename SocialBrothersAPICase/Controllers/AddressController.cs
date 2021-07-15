@@ -39,6 +39,54 @@ namespace SocialBrothersAPICase.Controllers
             return addresses;
         }
 
+        [Route("distance")]
+        [HttpGet]
+        public double GetDistance([FromQuery] string straat1,[FromQuery] int huisnummer1, [FromQuery] string toevoeging1, [FromQuery] string plaats1, [FromQuery] string land1, [FromQuery] string straat2, [FromQuery] int huisnummer2, [FromQuery] string toevoeging2, [FromQuery] string plaats2, [FromQuery] string land2)
+        {
+            Address address1 = new Address()
+            {
+                Straat = straat1,
+                Huisnummer = huisnummer1,
+                Toevoeging = toevoeging1,
+                Plaats = plaats1,
+                Land = land1,
+                Postcode = "lorem"
+            };
+            Address address2 = new Address()
+            {
+                Straat = straat2,
+                Huisnummer = huisnummer2,
+                Toevoeging = toevoeging2,
+                Plaats = plaats2,
+                Land = land2,
+                Postcode = "lorem"
+            };
+            if (ModelState.IsValid)
+            {
+            return APIClient.GetDistance(address1, address2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        [Route("distanceID")]
+        [HttpGet]
+        public double GetDistanceByID([FromQuery] int id1, [FromQuery] int id2)
+        {
+            Address address1 = SQLiteDB.GetByID(id1);
+            Address address2 = SQLiteDB.GetByID(id2);
+            if (ModelState.IsValid)
+            {
+                return APIClient.GetDistance(address1, address2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         // POST api/<AddressController>
         [Route("create")]
         [HttpPost]
@@ -49,9 +97,9 @@ namespace SocialBrothersAPICase.Controllers
 
         // PUT api/<AddressController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromQuery] Address address)
+        public void Put(int id, string newStraat, int? newHuisnummer, string newToevoeging, string newPostcode, string newPlaats, string newLand)
         {
-            SQLiteDB.UpdateAddress(id, address);
+            SQLiteDB.UpdateAddress(id, newStraat, newHuisnummer, newToevoeging, newPostcode, newPlaats, newLand);
         }
 
         // DELETE api/<AddressController>/5

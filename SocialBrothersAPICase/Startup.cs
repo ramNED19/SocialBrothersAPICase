@@ -19,6 +19,9 @@ namespace SocialBrothersAPICase
         {
             Configuration = configuration;
             SQLiteDB.CreateConnection();
+            
+            //Reset database
+            /*SQLiteDB.CreateAddressTable();*/
         }
 
         public IConfiguration Configuration { get; }
