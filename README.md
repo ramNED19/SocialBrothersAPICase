@@ -24,8 +24,7 @@ Delete:
 Om een adres te verwijderen moet enkel het id worden meegegeven.
 
 Afstanden:
-Voor het berekenen van afstanden is het mogelijk om 2 adressen handmatig in te vullen (postcode wordt niet gebruikt voor de berekening dus dit is ook niet een van de invoervelden)
-of de id's van 2 al ingevoerde adressen te gebruiken. De afstand wordt als double in kilometers teruggegeven.
+Voor het berekenen van afstanden is het mogelijk om 2 adressen handmatig in te vullen (postcode wordt niet gebruikt voor de berekening dus dit is ook niet een van de invoervelden) of de id's van 2 al ingevoerde adressen te gebruiken. De afstand wordt als double in kilometers teruggegeven.
 
 
 Omdat dit de eerste keer is dat ik een API heb gemaakt ben ik er best trots op dat het binnen een week gelukt is om een werkende API neer te zetten maar ik ben ervan overtuigd dat er veel verbeteringen mogelijk zijn, vooral op het gebied van foutafhandeling ben ik tot de conclusie gekomen dat ik eigenlijk meer tijd nodig heb om het proces echt goed onder de knie te krijgen.
