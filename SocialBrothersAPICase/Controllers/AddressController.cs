@@ -71,6 +71,22 @@ namespace SocialBrothersAPICase.Controllers
             }
         }
 
+        [Route("distanceID")]
+        [HttpGet]
+        public double GetDistanceByID([FromQuery] int id1, [FromQuery] int id2)
+        {
+            Address address1 = SQLiteDB.GetByID(id1);
+            Address address2 = SQLiteDB.GetByID(id2);
+            if (ModelState.IsValid)
+            {
+                return APIClient.GetDistance(address1, address2);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         // POST api/<AddressController>
         [Route("create")]
         [HttpPost]
@@ -81,9 +97,9 @@ namespace SocialBrothersAPICase.Controllers
 
         // PUT api/<AddressController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromQuery] Address address)
+        public void Put(int id, string newStraat, int? newHuisnummer, string newToevoeging, string newPostcode, string newPlaats, string newLand)
         {
-            SQLiteDB.UpdateAddress(id, address);
+            SQLiteDB.UpdateAddress(id, newStraat, newHuisnummer, newToevoeging, newPostcode, newPlaats, newLand);
         }
 
         // DELETE api/<AddressController>/5

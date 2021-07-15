@@ -63,7 +63,7 @@ namespace SocialBrothersAPICase.Model
                 {
                     value = "";
                 }
-                Regex regex = new Regex(@"^[a-zA-Z]?$");
+                Regex regex = new Regex(@"^[a-zA-Z]{0,5}$");
                 if (regex.IsMatch(value))
                 {
                     toevoeging = value.ToLower();
@@ -75,7 +75,6 @@ namespace SocialBrothersAPICase.Model
             }
         }
 
-        [Required]
         public string Postcode
         {
             get { return postcode; }
