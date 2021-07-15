@@ -80,14 +80,17 @@ namespace SocialBrothersAPICase.Model
             get { return postcode; }
             set
             {
-                Regex regex = new Regex(@"^([A-Za-z0-9 ]{0,10})$");
-                if (regex.IsMatch(value))
+                if (value != null)
                 {
-                    postcode = value.ToLower();
-                }
-                else
-                {
-                    throw new ArgumentException("Not a valid postal code!");
+                    Regex regex = new Regex(@"^([A-Za-z0-9 ]{0,10})$");
+                    if (regex.IsMatch(value))
+                    {
+                        postcode = value.ToLower();
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Not a valid postal code!");
+                    }
                 }
             }
         }
