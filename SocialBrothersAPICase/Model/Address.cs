@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace SocialBrothersAPICase.Model
 {
     public class Address
     {
+        public long Id { get; set; }
         private string straat;
         private int huisnummer;
         private string toevoeging;
@@ -57,7 +59,11 @@ namespace SocialBrothersAPICase.Model
             get { return toevoeging; }
             set
             {
-                Regex regex = new Regex(@"^[a-zA-Z]?$");
+                if(value == null)
+                {
+                    value = "";
+                }
+                Regex regex = new Regex(@"^[a-zA-Z]{0,5}$");
                 if (regex.IsMatch(value))
                 {
                     toevoeging = value.ToLower();
@@ -69,7 +75,6 @@ namespace SocialBrothersAPICase.Model
             }
         }
 
-        [Required]
         public string Postcode
         {
             get { return postcode; }
