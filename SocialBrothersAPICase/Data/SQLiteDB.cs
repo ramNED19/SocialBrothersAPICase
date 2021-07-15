@@ -192,7 +192,7 @@ namespace SocialBrothersAPICase.Data
                 }
                 if (newToevoeging != null && newToevoeging.Equals("."))
                 {
-                    address.Toevoeging = null;
+                    address.Toevoeging = "";
                 }
                 else
                 {
