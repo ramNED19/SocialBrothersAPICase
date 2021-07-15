@@ -190,15 +190,19 @@ namespace SocialBrothersAPICase.Data
                 {
                     address.Huisnummer = (int)newHuisnummer;
                 }
-                if (newToevoeging.Equals("."))
+                if (newToevoeging != null && newToevoeging.Equals("."))
                 {
                     address.Toevoeging = null;
                 }
-                else if (newToevoeging != null)
+                else
                 {
                     address.Toevoeging = newToevoeging;
                 }
-                if (newPostcode != null)
+                if (newPostcode != null && newPostcode.Equals("."))
+                {
+                    address.Postcode = "";
+                }
+                else
                 {
                     address.Postcode = newPostcode;
                 }
