@@ -198,7 +198,11 @@ namespace SocialBrothersAPICase.Data
                 {
                     address.Toevoeging = newToevoeging;
                 }
-                if (newPostcode != null)
+                if (newPostcode.Equals("."))
+                {
+                    address.Postcode = null;
+                }
+                else if (newPostcode != null)
                 {
                     address.Postcode = newPostcode;
                 }
